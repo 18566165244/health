@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context.xsd
+							http://www.springframework.org/schema/aop
+							http://www.springframework.org/schema/aop/spring-aop.xsd
+							http://www.springframework.org/schema/tx
+							http://www.springframework.org/schema/tx/spring-tx.xsd
+							http://code.alibabatech.com/schema/dubbo
+                            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--每一个dubbo应用（服务提供方和服务消费方），都必须指定一个唯一的名称-->
+    <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样 -->
+    <dubbo:application name="health_service_provider"></dubbo:application>
+    <!-- 连接服务注册中心zookeeper ip为zookeeper所在服务器的ip地址-->
+    <dubbo:registry address="zookeeper://192.168.3.128:2181"></dubbo:registry>
+    <!-- 注册  协议和port   端口默认是20880 查看pom.xml的配置-->
+    <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+    <!-- 扫描指定包，加入@Service注解的类会被发布为服务  -->
+    <dubbo:annotation package="cn.itheima.service.impl" />
+
+</beans>
